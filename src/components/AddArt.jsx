@@ -1,126 +1,68 @@
-import { useState } from "react";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import {
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
-import axios from "axios";
 
-function AddArt({ userId }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [artist, setArtist] = useState("");
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+import React, { useContext } from "react";
+import { AppContext } from "../pages/Test1$";
 
-  const handleSubmit = async (event) => {
+
+function AddArt() {
+  const { Post, setPost } = useContext(AppContext);
+
+  function handleSubmit(event) {
     event.preventDefault();
-    try {
-      await axios.post(`https://starfish-app-3xk6j.ondigitalocean.app/posts`, {
-        title,
-        description,
-        artist,
-        image,
-        price,
-        category,
-      });
-      alert("Oeuvre d'art ajoutée avec succès!");
-      setTitle("");
-      setDescription("");
-      setArtist("");
-      setImage("");
-      setPrice(0);
-      setCategory("");
-      setIsOpen(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    const data = new FormData();
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+    data.append("post[title]", event.target.title.value);
+    data.append("post[image]", event.target.image.files[0]);
+    data.append("post[description]", event.target.description.value);
+    data.append("post[category]", event.target.category.value);
+    data.append("post[artist]", event.target.artist.value);
 
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
+
+    submitToAPI(data);
+  }
+
+
+  function submitToAPI(data) {
+    fetch("http://localhost:3000/posts", {
+      method: "POST",
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPost(data.image_url);
+      })
+      .catch((error) => console.error(error));
+  }
 
   return (
-    <>
-      <Button onClick={handleOpen}> Ajouter +</Button>
-      <Modal isOpen={isOpen} onClose={handleClose}>
-        <ModalOverlay />
-        <ModalContent className="add-artwork">
-          <ModalHeader>Ajouter une oeuvre d'art</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <form onSubmit={handleSubmit}>
-              <label>
-                Titre:
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(event) => setTitle(event.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Description:
-                <textarea
-                  value={description}
-                  onChange={(event) => setDescription(event.target.value)}
-                  required
-                ></textarea>
-              </label>
-              <label>
-                Artiste:
-                <input
-                  type="text"
-                  value={artist}
-                  onChange={(event) => setArtist(event.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Oeuvre:
-                <input
-                  type="file"
-                  value={image}
-                  onChange={(event) => setImage(event.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Prix:
-                <input
-                  type="number"
-                  value={price}
-                  onChange={(event) => setPrice(event.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Catégorie:
-                <input
-                  type="text"
-                  value={category}
-                  onChange={(event) => setCategory(event.target.value)}
-                  required
-                />
-              </label>
-              <Button type="submit">Ajouter</Button>
-            </form>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </>
+    <div>
+      <h1>FileForm</h1>
+      <br/>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <label htmlFor="title">Title</label>
+        <input type="text" name="title" id="title" />
+
+
+        <label htmlFor="description">Description</label>
+        <textarea name="description" id="description"></textarea>
+        <br />
+
+        <label htmlFor="category">category</label>
+        <textarea name="category" id="category"></textarea>
+        <br />
+
+        <label htmlFor="artist">artist</label>
+        <textarea name="artist" id="artist"></textarea>
+        <br />
+
+        <label htmlFor="image">Image</label>
+        <input type="file" name="image" id="image" />
+        <br />
+
+        <button type="submit">Create Post</button>
+      </form>
+
+    </div>
+
   );
 }
 
