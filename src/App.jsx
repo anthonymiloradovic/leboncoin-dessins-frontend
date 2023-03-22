@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import IndexRoutes from './routes/IndexRoutes';
 
-import { UidContext } from './Routes/AppContext';
+import { UidContext } from './routes/AppContext';
 import axios from 'axios';
 import { createRoot } from 'react-dom/client';
 import Cookies from 'js-cookie';
@@ -43,19 +43,19 @@ const App = () => {
   }, []);
 
   return (
-
-    <UidContext.Provider value={uid}>
-      <IndexRoutes />
-    </UidContext.Provider>
     <div>
-       <ChakraProvider theme={theme}>
-      <IndexRoutes />
-      </ChakraProvider>
+      <UidContext.Provider value={uid}>
+        <ChakraProvider theme={theme}>
+          <IndexRoutes />
+        </ChakraProvider>
+      </UidContext.Provider>
     </div>
-
   );
+
 };
 
 const rootElement = document.getElementById('root');
 createRoot(rootElement).render(<App />);
+
 export default App;
+
