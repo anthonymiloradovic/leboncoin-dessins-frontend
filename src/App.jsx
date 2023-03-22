@@ -17,7 +17,9 @@ function App() {
   return (
     <div>
        <ChakraProvider theme={theme}>
-      <IndexRoutes />
+      <div className="content-wrapper"> 
+          <IndexRoutes />
+        </div>
       </ChakraProvider>
     </div>
   );

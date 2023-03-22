@@ -1,6 +1,6 @@
 import React from 'react';
 import { Parallax } from 'react-parallax';
-import Fleur from '../../assets/fleurs.jpg';
+import Fleur from '../../assets/home3.jpg';
 
 
 
