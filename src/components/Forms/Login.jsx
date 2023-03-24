@@ -10,6 +10,8 @@ import {
   Box,
   Heading,
   Text,
+  Alert,
+  AlertIcon
 } from "@chakra-ui/react";
 
 export default function Login() {
@@ -20,6 +22,7 @@ export default function Login() {
     },
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const navigate = useNavigate();
 
   function handleChange(e) {
@@ -34,12 +37,12 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-  
+
     if (!form.user.email || !form.user.password) {
       setErrorMessage("Veuillez remplir tous les champs.");
       return;
     }
-  
+
     const sendData = {
       method: "POST",
       headers: {
@@ -47,22 +50,23 @@ export default function Login() {
       },
       body: JSON.stringify(form),
     };
-  
+
     const data = await useFetch(
       "https://starfish-app-3xk6j.ondigitalocean.app/users/sign_in",
       sendData
     );
-  
+
     if (!data.token) {
       setErrorMessage("Adresse e-mail ou mot de passe incorrect.");
       return;
     }
-  
+
     const token = data.token;
     Cookies.set("user_token", token);
-    alert("Veuillez recharger la page pour que les changements prennent effet.");
-    navigate("/");
+    setShowSuccessAlert(true);
+    setTimeout(() => navigate("/"), 3000);
   }
+
   return (
     <Box
       p={4}
@@ -96,6 +100,12 @@ export default function Login() {
             Se connecter
           </Button>
         </form>
+        {showSuccessAlert && (
+          <Alert status="success" mt={4}>
+            <AlertIcon />
+            Vous êtes connecté avec succès. Vous allez être redirigé vers la page d'accueil.
+          </Alert>
+        )}
       </Box>
     </Box>
   );

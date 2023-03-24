@@ -14,13 +14,12 @@ function Tinder() {
         .map((i) => React.createRef()),
     [posts.length]
   );
-
   useEffect(() => {
     fetch('https://starfish-app-3xk6j.ondigitalocean.app/posts')
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setPosts(data.sort((a, b) => a.id - b.id)); // tri des images dans l'ordre
+        setPosts(data.sort((a, b) => b.id - a.id).reverse());
       })
       .catch((error) => console.error(error));
   }, []);
@@ -29,8 +28,6 @@ function Tinder() {
     setCurrentIndex(val);
     currentIndexRef.current = val;
   };
-
-  const canGoBack = currentIndex > 0;
 
   const canSwipe = currentIndex < posts.length;
 
@@ -47,29 +44,18 @@ function Tinder() {
       const removed = newPosts.splice(idx, 1)[0];
       newPosts.push(removed);
       setPosts(newPosts);
-
       childRefs[idx].current.restoreCard();
       updateCurrentIndex(currentIndexRef.current - 1);
     }
   };
-
   const swipe = async (dir) => {
     if (canSwipe && currentIndex < posts.length) {
       await childRefs[currentIndex].current.swipe(dir);
-      setPosts(posts.slice(0, currentIndex).concat(posts.slice(currentIndex + 1)));
     }
-  };
-
-  const goBack = async () => {
-    if (!canGoBack) return;
-    const newIndex = currentIndex - 1;
-    updateCurrentIndex(newIndex);
-    await childRefs[newIndex].current.restoreCard();
   };
 
   return (
     <div>
-      <h1>React Tinder Card</h1>
       <div className="cardContainer">
         {posts.map((post, index) => (
           <TinderCard
@@ -89,22 +75,10 @@ function Tinder() {
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>
           Swipe left!
         </button>
-        <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>
-          Undo swipe!
-        </button>
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
       </div>
-      {lastDirection ? (
-        <h2 key={lastDirection} className='infoText'>
-          You swiped {lastDirection}
-        </h2>
-      ) : (
-        <h2 className='infoText'>
-          Swipe a card or press a button to get Restore Card button visible!
-        </h2>
-      )}
     </div>
   )
 }
 
-export default Tinder
+export default Tinder 

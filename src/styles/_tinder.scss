@@ -32,9 +32,12 @@
 }
 .swipe {
   position: absolute;
+  z-index: -1;
 }
 
-
+.swipe.disappearing {
+  opacity: 0;
+}
 
 .cardContent {
   width: 100%;
