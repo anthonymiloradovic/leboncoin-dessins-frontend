@@ -19,9 +19,9 @@ const Footer = () => {
         <div>
           <h4>Communauté Github</h4>
           <a href="https://github.com/anthonymiloradovic"> Anthony</a>
-          <a href="https://github.com/Sarahmela93"> Sarah</a>
           <a href="https://github.com/klt56"> Kevin</a>
           <a href="https://github.com/jerryfarwell"> Jerry</a>
+          <a href="https://github.com/Sarahmela93"> Sarah</a>
         </div>
         <div>
           <h4>Aide</h4>

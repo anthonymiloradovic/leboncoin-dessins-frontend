@@ -75,9 +75,25 @@
    }
  }
  
- nav a {
-   margin: 0 2rem;
-   color: $color1;
-   text-decoration: none;
- }
- 
+ .nav-links {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  
+  li {
+  display: inline-block;
+  margin-right: 1rem;
+  
+
+  &:last-child {
+    margin-right: 0;
+  }
+  }
+  }
+  
+  
+  
+  
+  
+  
