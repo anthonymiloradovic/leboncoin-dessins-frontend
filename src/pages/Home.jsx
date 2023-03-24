@@ -6,6 +6,7 @@ import Paralax from '../components/Parallax/Paralax';
 import Paralax2 from '../components/Parallax/Paralax2';
 import Text from '../components/Parallax/Text';
 import Text2 from '../components/Parallax/Text2';
+import { Button } from "@chakra-ui/react";
 
 
 const Home = () => {
@@ -26,7 +27,9 @@ const Home = () => {
       <Paralax2 />
       <Text2 />
 
-      <button onClick={toggleDisplay}>Changer d'affichage</button>
+      <Button colorScheme='purple' onClick={toggleDisplay} size="lg" mx="auto" my={8} d="block">
+        Changer d'affichage
+      </Button>
       {currentDisplay === "Tinder" ? <Tinder /> : <FilteredList />}
     </div>
   );

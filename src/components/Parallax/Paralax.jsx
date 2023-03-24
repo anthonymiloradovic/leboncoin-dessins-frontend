@@ -1,14 +1,14 @@
 import React from 'react';
 import { Parallax } from 'react-parallax';
-import Fleur from '../../assets/home3.jpg';
+import Parallax1 from '../../assets/parallax1.jpg';
 
 
 
 const Paralax = () => (
     <div className='parallax-container'>
-    <Parallax className='image' blur={0} bgImage={Fleur} strength={300} bgImageStyle={{minHeight:"100vh"}}>
+    <Parallax className='image' blur={0} bgImage={Parallax1} strength={300} bgImageStyle={{minHeight:"100vh"}}>
         <div className='content'>
-            <span className="img-txt">Des dessins à tout va</span>
+            <span className="img-txt">Leboncoin des dessins</span>
         </div>
     </Parallax>
     </div>

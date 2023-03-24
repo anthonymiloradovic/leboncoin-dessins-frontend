@@ -3,7 +3,6 @@ import IndexRoutes from './routes/IndexRoutes';
 
 import { UidContext } from './routes/AppContext';
 import axios from 'axios';
-import { createRoot } from 'react-dom/client';
 import Cookies from 'js-cookie';
 
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
@@ -54,8 +53,6 @@ const App = () => {
 
 };
 
-const rootElement = document.getElementById('root');
-createRoot(rootElement).render(<App />);
 
 export default App;
 

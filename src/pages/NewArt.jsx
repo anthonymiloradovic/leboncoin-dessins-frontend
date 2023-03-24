@@ -1,12 +1,24 @@
+import AddArt from '../components/AddArt';
+import { createContext, useState } from "react";
 
-const NewArt = () => {
-    return (
-        <div>
-            Bienvenue ici pour ajouter une annonce
+export const AppContext = createContext(null);
 
+  const NewArt = () => {
+    {
+        const [Post, setPost] = useState(AppContext)
+        return (
+            <div>
 
-        </div>
-    );
+          <AppContext.Provider value={{ Post, setPost}}>
+            <div >
+           <AddArt />
+           
+            </div>
+          </AppContext.Provider>
+           </div>
+        );
+      }
 };
 
 export default NewArt;
+
