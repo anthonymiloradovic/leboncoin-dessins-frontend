@@ -4,10 +4,12 @@ import FavoriteDetails from '../pages/FavoriteDetails';
 import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import NewArt from '../pages/NewArt';
+import About from '../pages/About'
+import Panier from '../pages/Panier'
 
 import Register from '../components/Forms/Register';
 import Login from '../components/Forms/Login';
-
+import Logout from '../components/Forms/Logout';
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -24,10 +26,11 @@ const IndexRoutes = () => {
             <Route path="/favorites" element={<Favorite />} />
             <Route path="/favorites/:id" element={<FavoriteDetails />} />
              <Route path="/new-art" element={<NewArt />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/signup" element={<Register />} />
               <Route path="/login" element={<Login />} />
-             
-             
+             <Route path="/logout" element={<Logout />} />
+              <Route path ="/about" element={<About />} /> 
+              <Route path="/panier" element={<Panier />} />
 
 
 
