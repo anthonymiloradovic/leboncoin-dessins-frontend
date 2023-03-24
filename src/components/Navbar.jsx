@@ -25,7 +25,7 @@ const Navbar = () => {
         <Link to="/" onClick={showNavbar}>
           Home
         </Link>
-        <Link to="/signup" onClick={showNavbar}>
+        <Link to="/register" onClick={showNavbar}>
           S'inscrire
         </Link>
         <Link to="/login" onClick={showNavbar}>

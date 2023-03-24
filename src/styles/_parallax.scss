@@ -31,7 +31,8 @@
   }
   
   .content span.img-txt {
-    background-color: rgb(220, 147, 147);
+    background-color: #f2e8ff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     text-transform: uppercase;
     color: rgb(0, 0, 0);
     padding: 1rem;
@@ -57,4 +58,22 @@
       transition: opacity 0.5s ease-in-out;
   
   }
-  
+  .text-box-container {
+    background-color: #f2e8ff;
+    padding: 50px;
+    margin: 50px;
+    border-radius: 10px;
+    }
+    
+    .text-box-title {
+    font-size: 36px;
+    color: #632ca3;
+    text-align: center;
+    }
+    
+    .text-box-content {
+    font-size: 18px;
+    color: #2e2e2e;
+    line-height: 1.5;
+    margin-top: 20px;
+    }

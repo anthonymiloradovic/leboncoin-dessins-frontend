@@ -1,7 +1,15 @@
-
 import React, { useContext } from "react";
-import { AppContext } from "../pages/Test1$";
-
+import { AppContext } from "../pages/NewArt";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+  Button,
+  Box,
+  FormHelperText,
+  Select,
+} from "@chakra-ui/react";
 
 function AddArt() {
   const { Post, setPost } = useContext(AppContext);
@@ -16,13 +24,11 @@ function AddArt() {
     data.append("post[category]", event.target.category.value);
     data.append("post[artist]", event.target.artist.value);
 
-
     submitToAPI(data);
   }
 
-
   function submitToAPI(data) {
-    fetch("http://localhost:3000/posts", {
+    fetch("https://starfish-app-3xk6j.ondigitalocean.app/posts", {
       method: "POST",
       body: data,
     })
@@ -34,35 +40,43 @@ function AddArt() {
   }
 
   return (
-    <div>
-      <h1>FileForm</h1>
-      <br/>
+    <Box>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="title">Title</label>
-        <input type="text" name="title" id="title" />
+        <FormControl isRequired>
+          <FormLabel htmlFor="title">Titre</FormLabel>
+          <Input type="text" name="title" id="title" />
+        </FormControl>
 
+        <FormControl>
+          <FormLabel htmlFor="description">Description</FormLabel>
+          <Textarea name="description" id="description" />
+        </FormControl>
 
-        <label htmlFor="description">Description</label>
-        <textarea name="description" id="description"></textarea>
-        <br />
+        <FormControl>
+          <FormLabel>Catégorie du dessin</FormLabel>
+          <Select placeholder="Selectionne une catégorie">
+            <option>Manga</option>
+            <option>Peinture</option>
+            <option>Crayon</option>
+            <option>Collage</option>
+            <option>Abstrait</option>
+            <option>Autres</option>
+          </Select>
+        </FormControl>
 
-        <label htmlFor="category">category</label>
-        <textarea name="category" id="category"></textarea>
-        <br />
+        <FormControl isRequired>
+          <FormLabel htmlFor="artist">Artiste</FormLabel>
+          <Textarea name="artist" id="artist" />
+        </FormControl>
 
-        <label htmlFor="artist">artist</label>
-        <textarea name="artist" id="artist"></textarea>
-        <br />
+        <FormControl isRequired>
+          <FormLabel htmlFor="image">Image</FormLabel>
+          <Input type="file" name="image" id="image" />
+        </FormControl>
 
-        <label htmlFor="image">Image</label>
-        <input type="file" name="image" id="image" />
-        <br />
-
-        <button type="submit">Create Post</button>
+        <Button colorScheme='blue' type="submit">Création d'annonce</Button>
       </form>
-
-    </div>
-
+    </Box>
   );
 }
 
