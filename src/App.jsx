@@ -26,7 +26,7 @@ const App = () => {
       try {
         const res = await axios({
           method: "GET",
-          url: "http://localhost:3000/member-data",
+          url: "https://starfish-app-3xk6j.ondigitalocean.app/member-data",
 
           headers: {
             'Authorization':Cookies.get('user_token')

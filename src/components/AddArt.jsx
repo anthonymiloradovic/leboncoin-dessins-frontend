@@ -16,16 +16,18 @@ function AddArt() {
 
   function handleSubmit(event) {
     event.preventDefault();
+  
     const data = new FormData();
-
-    data.append("post[title]", event.target.title.value);
-    data.append("post[image]", event.target.image.files[0]);
-    data.append("post[description]", event.target.description.value);
-    data.append("post[category]", event.target.category.value);
-    data.append("post[artist]", event.target.artist.value);
-
+  
+    data.append("post[title]", event.target.title?.value);
+    data.append("post[image]", event.target.image?.files[0]);
+    data.append("post[description]", event.target.description?.value);
+    data.append("post[category]", event.target.category?.value);
+    data.append("post[artist]", event.target.artist?.value);
+  
     submitToAPI(data);
   }
+  
 
   function submitToAPI(data) {
     fetch("https://starfish-app-3xk6j.ondigitalocean.app/posts", {
@@ -35,9 +37,16 @@ function AddArt() {
       .then((response) => response.json())
       .then((data) => {
         setPost(data.image_url);
+        window.location.href = '/'; // redirection vers la page home
+        alert({ // affichage de l'alerte
+          title: "Annonce créée avec succès !",
+          status: "success",
+          isClosable: true,
+        });
       })
       .catch((error) => console.error(error));
   }
+  
 
   return (
     <Box>
