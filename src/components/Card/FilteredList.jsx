@@ -1,5 +1,15 @@
 import { useState, useEffect } from "react";
-import { Grid, GridItem, Box, Image, Text, Button, Alert, AlertIcon } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import {
+  Grid,
+  GridItem,
+  Box,
+  Image,
+  Text,
+  Button,
+  Alert,
+  AlertIcon,
+} from "@chakra-ui/react";
 
 const FilteredList = () => {
   const [category, setCategory] = useState("all");
@@ -7,6 +17,7 @@ const FilteredList = () => {
   const [favorites, setFavorites] = useState([]);
   const [addedToFavorites, setAddedToFavorites] = useState(false);
   const [alreadyAddedToFavorites, setAlreadyAddedToFavorites] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -58,84 +69,79 @@ const FilteredList = () => {
     width: "100%",
   };
 
+  const Cart = () => {
+    return (
+      <div>
+        {cartItems.map((item) => (
+          <div key={item.id}>
+            <Image src={item.image_url} alt={item.title} />
+            <Text>{item.title}</Text>
+            <Text>{item.price} €</Text>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div>
       <label>
-        Filter by category:
-        <select value={category} onChange={handleChange}>
+      <Button bgColor="gray.200" color="gray.800" hover={{ bgColor: "gray.300", color: "gray.900" }}>
+        Filter by category
+      </Button>
+
+      <select value={category} onChange={handleChange} style={{ marginLeft: "10px" }}>
           <option value="all">All</option>
           <option value="peinture">Peinture</option>
           <option value="manga">Manga</option>
           <option value="abstrait">Abstrait</option>
-          <option value="noir et blanc">Noir et blanc</option>
-          <option value="animaux">Animaux</option>
         </select>
       </label>
-      {addedToFavorites && (
-        <Alert status="success" mt={2}>
-          <AlertIcon />
-          Ajouté aux favoris !
-        </Alert>
-      )}
-      {alreadyAddedToFavorites && (
-        <Alert status="warning" mt={2}>
-          <AlertIcon />
-          Cette carte est déjà ajoutée aux favoris !
-        </Alert>
-      )}
       <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-        {filteredItems.map((post) => {
-          const isAlreadyAdded = favorites.some((favorite) => favorite.id === post.id);
-          return (
-            <GridItem key={post.id}>
-              <Box borderWidth="1px" borderRadius="lg" overflow="hidden" style={cardStyle}>
-                <Image src={post.image_url} alt={post.title} style={imageStyle} />
-                <Box p="6">
-                  <Box d="flex" alignItems="baseline">
-                    <Text fontWeight="semibold" fontSize="xl" mr={2}>
-                      {post.title}
-                    </Text>
-                    <Text color="gray.500" fontSize="sm">
-                      {post.category}
-                    </Text>
-                  </Box>
-                  <Box>
-                    <Text mt={2} color="gray.600">
-                      {post.description}
-                    </Text>
-                  </Box>
-    
-                  <Box d="flex" mt={2} alignItems="center">
-                    <Text fontWeight="semibold" fontSize="xl">
-                      {post.price} €
-                    </Text>
-                  </Box>
-                  <Box mt={2}>
-                    <Button
-                      colorScheme="teal"
-                      onClick={() => {
-                        if (isAlreadyAdded) {
-                          setAlreadyAddedToFavorites(true);
-                          setTimeout(() => {
-                            setAlreadyAddedToFavorites(false);
-                          }, 2000);
-                        } else {
-                          addToFavorites(post);
-                        }
-                      }}
-                    >
-                      Ajouter aux favoris
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            </GridItem>
-          );
-        })}
-      </Grid>
-    </div>
-  );
-
+        {filteredItems.map((post) => (
+     <GridItem key={post.id}>
+      <Box borderWidth="1px" borderRadius="lg" overflow="hidden" style={cardStyle}>
+        <Image src={post.image_url} alt={post.title} style={imageStyle} />
+        <Box p="6">
+      <Box d="flex" alignItems="baseline">
+        <Text fontSize="sm" fontWeight="bold" mr={2}>
+          {post.category}
+     </Text>
+    <Text fontSize="xs" color="gray.500">
+  {new Date(post.created_at).toLocaleDateString()}
+</Text>
+</Box>
+<Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
+{post.title}
+</Box>
+<Box>
+<Text fontSize="sm" color="gray.500" noOfLines={2}>
+{post.description}
+</Text>
+</Box>
+<Box mt="2">
+<Button size="sm" bg="#6B46C1" color="#fff" onClick={() => addToFavorites(post)}>
+Ajouter aux favoris
+</Button>
+</Box>
+</Box>
+</Box>
+</GridItem>
+))}
+</Grid>
+<Box mt="4">
+<Alert status="success" variant="subtle" alignItems="center" justifyContent="center" flexDirection="column" textAlign="center" mb={3} display={addedToFavorites ? "flex" : "none"}>
+<AlertIcon />
+Post added to favorites!
+</Alert>
+<Alert status="warning" variant="subtle" alignItems="center" justifyContent="center" flexDirection="column" textAlign="center" mb={3} display={alreadyAddedToFavorites ? "flex" : "none"}>
+<AlertIcon />
+Post already added to favorites!
+</Alert>
+<Cart />
+</Box>
+</div>
+);
 };
 
 export default FilteredList;

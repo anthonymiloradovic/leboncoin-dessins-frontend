@@ -64,7 +64,10 @@ export default function Login() {
     const token = data.token;
     Cookies.set("user_token", token);
     setShowSuccessAlert(true);
-    setTimeout(() => navigate("/"), 3000);
+    setTimeout(() => {
+      navigate("/");
+      window.location.reload(); // Pour recharger automatiquement la page
+    }, 3000);
   }
 
   return (

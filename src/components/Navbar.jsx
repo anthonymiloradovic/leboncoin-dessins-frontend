@@ -84,6 +84,7 @@ const Navbar = () => {
                   Mes favoris
                 </Link>
               </li>
+                             
               <li>
                 <Link to="/" onClick={handleLogout}>
                   Me deconnecter
@@ -107,11 +108,6 @@ const Navbar = () => {
                   Se connecter
                 </Link>
               </li>
-              <li>
-                <Link to="/about" onClick={showNavbar}>
-                  A propos
-                </Link>
-              </li>
             </>
           )}
         </ul>
@@ -120,16 +116,7 @@ const Navbar = () => {
           <FaTimes />
         </button>
       </nav>
-      <div className="nav-right-container">
-        {" "}
-        {/* Nouveau div pour placer le panier à droite */}
-        {/* Afficher le panier si l'utilisateur est connecté */}
-        {isLoggedIn && (
-          <Link to="/cart" onClick={showNavbar}>
-            <FaShoppingCart />
-          </Link>
-        )}
-      </div>
+    
       <button className="nav-btn" onClick={showNavbar}>
         <FaBars />
       </button>
