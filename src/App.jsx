@@ -4,6 +4,7 @@ import IndexRoutes from './routes/IndexRoutes';
 import { UidContext } from './routes/AppContext';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import CookieConsent from 'react-cookie-consent';
 
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
@@ -14,7 +15,6 @@ const theme = extendTheme({
       900: "#1a202c",
     },
   },
-
 });
 
 
@@ -27,7 +27,6 @@ const App = () => {
         const res = await axios({
           method: "GET",
           url: "https://starfish-app-3xk6j.ondigitalocean.app/member-data",
-
           headers: {
             'Authorization':Cookies.get('user_token')
           }
@@ -45,14 +44,12 @@ const App = () => {
     <div>
       <UidContext.Provider value={uid}>
         <ChakraProvider theme={theme}>
+          <CookieConsent debug={true} style={{ textAlign: "left"}} buttonStyle={{color: "#fff", background: "#D540EB", fontSize:"14px"}} buttonText="J'accepte"> Ce site utilise les cookies.</CookieConsent>
           <IndexRoutes />
         </ChakraProvider>
       </UidContext.Provider>
     </div>
   );
-
 };
 
-
 export default App;
-

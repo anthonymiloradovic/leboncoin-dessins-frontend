@@ -16,6 +16,8 @@ import {
   ModalBody,
   ModalCloseButton,
   Text,
+  Checkbox,
+  Link
 } from "@chakra-ui/react";
 
 export default function Register() {
@@ -24,6 +26,7 @@ export default function Register() {
       email: "",
       password: "",
       confirmPassword: "",
+      acceptedTerms: false
     },
   });
   const [showModal, setShowModal] = useState(false);
@@ -34,20 +37,20 @@ export default function Register() {
       ...form,
       user: {
         ...form.user,
-        [e.target.id]: e.target.value,
+        [e.target.id]: e.target.type === "checkbox" ? e.target.checked : e.target.value,
       },
     });
   }
 
   function validateForm() {
-    const { email, password, confirmPassword } = form.user;
-    return email !== "" && email.includes("@") && password.length >= 6 && password === confirmPassword;
+    const { email, password, confirmPassword, acceptedTerms } = form.user;
+    return email !== "" && email.includes("@") && password.length >= 6 && password === confirmPassword && acceptedTerms;
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (!validateForm()) {
-      alert("Veuillez entrer un email valide et un mot de passe (au moins 6 caractères).");
+      alert("Veuillez entrer un email valide et un mot de passe (au moins 6 caractères) et accepter les conditions générales.");
       return;
     }
     const sendData = {
@@ -97,30 +100,38 @@ export default function Register() {
             focusBorderColor={passwordFocusBorderColor}
           />
         </FormControl>
-        <FormControl id="confirmPassword" mt="4" isRequired>
-          <FormLabel>Confirm Password</FormLabel>
-          <Input
-            type="password"
-            onChange={handleChange}
-            borderColor={passwordFocusBorderColor}
-            focusBorderColor={passwordFocusBorderColor}
-          />
-        </FormControl>
+    <FormControl id="confirmPassword" mt="4" isRequired>
+      <FormLabel>Confirm Password</FormLabel>
+      <Input
+        type="password"
+        onChange={handleChange}
+        borderColor={confirmPasswordBorderColor}
+        focusBorderColor={confirmPasswordFocusBorderColor}
+      />
+    </FormControl>
 
-        <Button type="submit" colorScheme="blue" mt="4">
-          S'inscrire
-        </Button>
-      </form>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Erreur d'inscription</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text>Veuillez entrer un email valide et un mot de passe (au moins 6 caractères).</Text>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </Box>
-  );
+    <FormControl id="acceptedTerms" mt="4" isRequired>
+      <Checkbox onChange={handleChange}>I accept the terms and conditions</Checkbox>
+    </FormControl>
+
+    <Button mt="4" colorScheme="blue" type="submit">
+      Sign up
+    </Button>
+  </form>
+
+  <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+    <ModalOverlay />
+    <ModalContent>
+      <ModalHeader>Registration successful</ModalHeader>
+      <ModalCloseButton />
+      <ModalBody>
+        <Text>Your account has been created successfully. You can now log in and start using our platform.</Text>
+        <Link href="/" color="blue.500">
+          Go to login page
+        </Link>
+      </ModalBody>
+    </ModalContent>
+  </Modal>
+</Box>
+);
 }
