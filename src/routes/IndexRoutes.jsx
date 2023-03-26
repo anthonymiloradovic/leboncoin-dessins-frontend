@@ -4,8 +4,6 @@ import FavoriteDetails from '../pages/FavoriteDetails';
 import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import NewArt from '../pages/NewArt';
-import About from '../pages/About'
-import Panier from '../pages/Panier'
 
 import Register from '../components/Forms/Register';
 import Login from '../components/Forms/Login';
@@ -29,8 +27,6 @@ const IndexRoutes = () => {
               <Route path="/signup" element={<Register />} />
               <Route path="/login" element={<Login />} />
              <Route path="/logout" element={<Logout />} />
-              <Route path ="/about" element={<About />} /> 
-              <Route path="/panier" element={<Panier />} />
 
 
 

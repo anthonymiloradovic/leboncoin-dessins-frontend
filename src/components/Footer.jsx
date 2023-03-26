@@ -1,4 +1,8 @@
+import React, { useState } from "react";
+
 const Footer = () => {
+  const [isHovering, setIsHovering] = useState(false);
+
   return (
     <div className="footer">
       <div className="top">
@@ -25,9 +29,15 @@ const Footer = () => {
         </div>
         <div>
           <h4>Aide</h4>
-          <a href="/">Contact Nous</a>
+          <a
+            href="/"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            Contact nous
+          </a>
+          {isHovering && <p>au: 0101010101</p>}
           <a href="/">Nous supporter</a>
-          <a href="/">Troubleshooting</a>
         </div>
         <div>
           <h4>A Propos</h4>
