@@ -92,7 +92,7 @@ export default function Register() {
         </FormControl>
 
         <FormControl id="password" mt="4" isRequired>
-          <FormLabel>Password</FormLabel>
+          <FormLabel>Mot de passe</FormLabel>
           <Input
             type="password"
             onChange={handleChange}
@@ -101,7 +101,7 @@ export default function Register() {
           />
         </FormControl>
     <FormControl id="confirmPassword" mt="4" isRequired>
-      <FormLabel>Confirm Password</FormLabel>
+      <FormLabel>Confirme le mot de passe</FormLabel>
       <Input
         type="password"
         onChange={handleChange}
@@ -111,23 +111,23 @@ export default function Register() {
     </FormControl>
 
     <FormControl id="acceptedTerms" mt="4" isRequired>
-      <Checkbox onChange={handleChange}>I accept the terms and conditions</Checkbox>
+      <Checkbox onChange={handleChange}>J'accepte les termes et les conditions</Checkbox>
     </FormControl>
 
     <Button mt="4" colorScheme="blue" type="submit">
-      Sign up
+      Inscription
     </Button>
   </form>
 
   <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
     <ModalOverlay />
     <ModalContent>
-      <ModalHeader>Registration successful</ModalHeader>
+      <ModalHeader>Inscription réussie</ModalHeader>
       <ModalCloseButton />
       <ModalBody>
-        <Text>Your account has been created successfully. You can now log in and start using our platform.</Text>
+        <Text>Ton compte a été créé avec succès. Tu peux maintenant vous connecter et commencer à utiliser notre plateforme.</Text>
         <Link href="/" color="blue.500">
-          Go to login page
+          Aller sur la page de connexion
         </Link>
       </ModalBody>
     </ModalContent>
