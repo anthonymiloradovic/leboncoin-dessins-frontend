@@ -87,11 +87,11 @@ const FilteredList = () => {
     <div>
       <label>
       <Button bgColor="gray.200" color="gray.800" hover={{ bgColor: "gray.300", color: "gray.900" }}>
-        Filter by category
+        Filtré par catégories
       </Button>
 
       <select value={category} onChange={handleChange} style={{ marginLeft: "10px" }}>
-          <option value="all">All</option>
+          <option value="all">Tout</option>
           <option value="peinture">Peinture</option>
           <option value="manga">Manga</option>
           <option value="abstrait">Abstrait</option>
@@ -132,11 +132,11 @@ Ajouter aux favoris
 <Box mt="4">
 <Alert status="success" variant="subtle" alignItems="center" justifyContent="center" flexDirection="column" textAlign="center" mb={3} display={addedToFavorites ? "flex" : "none"}>
 <AlertIcon />
-Post added to favorites!
+Post ajouté aux favoris!
 </Alert>
 <Alert status="warning" variant="subtle" alignItems="center" justifyContent="center" flexDirection="column" textAlign="center" mb={3} display={alreadyAddedToFavorites ? "flex" : "none"}>
 <AlertIcon />
-Post already added to favorites!
+Post déja ajouté aux favoris!
 </Alert>
 <Cart />
 </Box>

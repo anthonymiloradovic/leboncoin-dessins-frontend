@@ -89,7 +89,7 @@ export default function Login() {
           </FormControl>
 
           <FormControl mb={4} isRequired>
-            <FormLabel htmlFor="password">Password</FormLabel>
+            <FormLabel htmlFor="password">Mot de passe</FormLabel>
             <Input type="password" id="password" onChange={handleChange} />
           </FormControl>
 

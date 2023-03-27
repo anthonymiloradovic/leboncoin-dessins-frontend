@@ -42,7 +42,7 @@ const Footer = () => {
         <div>
           <h4>A Propos</h4>
           <a href="/">Notre histoire</a>
-          <a href="/">Team</a>
+          <a href="/">Notre team</a>
           <a href="/">Carrieres</a>
         </div>
       </div>

@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function ForgetPassword() {
   return (
-    <div>ForgetPassword</div>
+    <div>Mot de passe oublié</div>
   )
 }
