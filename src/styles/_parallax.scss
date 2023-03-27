@@ -77,3 +77,36 @@
     line-height: 1.5;
     margin-top: 20px;
     }
+
+    @media only screen and (max-width: 767px) {
+      .parallax-container {
+        height: 100%;
+      }
+      .image {
+        height: auto;
+      }
+      .parallax-text {
+        margin-top: 40%;
+        font-size: 24px;
+      }
+      .image .content span.img-txt {
+        font-size: 1rem;
+        letter-spacing: 5px;
+      }
+      .text-box {
+        padding: 1rem;
+        margin: 0;
+      }
+      .text-box-container {
+        padding: 20px;
+        margin: 20px;
+      }
+      .text-box-title {
+        font-size: 24px;
+      }
+      .text-box-content {
+        font-size: 16px;
+        line-height: 1.2;
+      }
+    }
+    
